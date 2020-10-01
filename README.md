@@ -1,5 +1,6 @@
 # ai_engineering
 AI Engineering Technical Test
+A script to ingest time metrics data into a database and a API server to extract the data.
 
 ## Setup
 
@@ -28,10 +29,10 @@ sudo -u postgres psql -f setup.sql
 
 To run the ingestion script
 ```bash
-python3 ingest.py
+python3 ingester.py
 ```
 
-This will add new time metric data into the `metrics` table. The timestamps of the data will cover the last five minutes.
+This will add new time metric data into the `metrics` table. The data added will be printed by the script. The timestamps of the data will cover the last five minutes.
 
 
 ## API Server
@@ -77,7 +78,7 @@ The parameters in the JSON body determine what data is returned and how. Below i
 A request with this JSON body will return the timestamp and cpu_load of all entries satisfying the criteria. The criteria is that the 25 < cpu_load < 50 and the concurrency < 300000. The results will be ordered by cpu_load, in descending order.
 
 ```bash
-~$ curl -X POST localhost:8345/query -H "Content-Type:application/json" -d '{"metadata": ["timestamp", "cpu_load"], "order_by":"cpu_load", "reverse": true, "criteria":{"cpu_load": {"less than": 50, "more than": 25}, "concurrency": {"less than": 300000}}}'
+curl -X POST localhost:8345/query -H "Content-Type:application/json" -d '{"metadata": ["timestamp", "cpu_load"], "order_by":"cpu_load", "reverse": true, "criteria":{"cpu_load": {"less than": 50, "more than": 25}, "concurrency": {"less than": 300000}}}'
 ```
 
 Returns
