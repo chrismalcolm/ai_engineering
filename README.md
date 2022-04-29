@@ -1,5 +1,6 @@
 # ai_engineering
-AI Engineering Technical Test
+Sky Global Reliability Technical Test for the AI Engineering Team 2nd stage interview.
+
 A script to ingest time metrics data into a database and a API server to extract the data.
 
 ## Setup
